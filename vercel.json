@@ -1,0 +1,26 @@
+{
+  "builds": [
+    {
+      "src": "backend/api/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "frontend/**",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/signup",
+      "dest": "/backend/api/signup.js"
+    },
+    {
+      "src": "/api/login",
+      "dest": "/backend/api/login.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
+    }
+  ]
+}
