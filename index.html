@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.js">
     <title>HARAKA CONNECT </title>
 </head>
 <body>
 
     <!-- Header Section -->
     <header id="home">
-        <img src="1.jpg" alt="logo" id="bk">
+        <img src="D:\ltd\1.jpg" alt="logo" id="bk">
         <h1>HARAKA CONNECT </h1>
 
         <!-- 3-bar toggle button -->
@@ -154,7 +155,38 @@
                 video.pause(); // Pause the video when it's out of view
             }
         });
-    </script>
+
+  
+
+    
+  document.getElementById('signup-form').addEventListener('submit', function(event) {
+    event.preventDefault();  // Prevent default form submission
+
+    // Collect form data
+    const firstname = document.getElementById('firstname').value;
+    const lastname = document.getElementById('lastname').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const password = document.getElementById('password').value;
+    const service = document.getElementById('service').value;
+
+    // Push data to Firebase Realtime Database
+    firebase.database().ref('users').push({
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      phone: phone,
+      password: password,
+      service: service
+    }).then(function() {
+      alert('User signed up successfully!');
+    }).catch(function(error) {
+      alert('Error: ' + error.message);
+    });
+  });
+</script>
+        
+
     <h3>Our Mission</h3>
     <ul class="mission-list">
         <li>Improve service accessibility by providing a reliable platform for customers to access services efficiently.</li>
@@ -347,6 +379,255 @@
     <p><strong>NB: 1Kg is at 10,000 UGX</strong></p>
 </div>
 
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .service {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .service:hover {
+            transform: scale(1.02);
+        }
+
+        .service img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .form {
+            margin-top: 15px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .pricing {
+            margin-top: 15px;
+        }
+
+        .subscription-plan {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+    </style>
+    <div class="container">
+
+        <div class="services">
+
+            <!-- Electronics Shopping Service -->
+            <div class="service">
+                <img src="a.jpg" alt="Electronics Shopping">
+                <h2>Electronics Shopping</h2>
+                <p>We connect you to our professionals in Kampala and abroad, who look for the type of phone you like, original and at an affordable price, whether new, used, or refurbished!</p>
+                <div class="form">
+                    <label for="phone-name">Name, Model or Type:</label>
+                    <input type="text" id="phone-name" placeholder="e.g., iPhone 13">
+                    
+                    <label for="phone-condition">Condition:</label>
+                    <select id="phone-condition">
+                        <option value="new">New</option>
+                        <option value="used">Used</option>
+                        <option value="refurbished">Refurbished</option>
+                    </select>
+                    
+                    <label for="phone-color">Color:</label>
+                    <input type="text" id="phone-color" placeholder="e.g., Black">
+                    
+                    <label for="local-price">Local Price:</label>
+                    <input type="number" id="local-price" placeholder="Enter price in UGX">
+                    
+                    <button onclick="submitPhoneForm()">Submit</button>
+                </div>
+            </div>
+
+            <!-- Kampala Shoes Shopping Service -->
+            <div class="service">
+                <img src="c.jpg" alt="Shoes Shopping">
+                <h2>Kampala Shoes Shopping</h2>
+                <p>We connect you to our professionals in Kampala, who look for any type of shoes you like, original and at an affordable price.</p>
+                <div class="form">
+                    <label for="shoes-name">Name of Shoes:</label>
+                    <input type="text" id="shoes-name" placeholder="e.g., Nike Air Max">
+                    
+                    <label for="shoe-size">Number Size:</label>
+                    <input type="number" id="shoe-size" placeholder="Enter your shoe size">
+                    
+                    <label for="shoe-color">Color:</label>
+                    <input type="text" id="shoe-color" placeholder="e.g., Red">
+                    
+                    <label for="shoes-local-price">Local Price:</label>
+                    <input type="number" id="shoes-local-price" placeholder="Enter price in UGX">
+                    
+                    <button onclick="submitShoesForm()">Submit</button>
+                </div>
+            </div>
+
+            <!-- Carpentry/Welding Service -->
+            <div class="service">
+                <img src="d.jpg" alt="Carpentry/Welding">
+                <h2>Carpentry/Welding</h2>
+                <p>We connect you with skilled professionals for various items like tables, beds, doors, windows, and more. Save time and money!</p>
+                <div class="form">
+                    <label for="carpentry-item">Item Needed:</label>
+                    <input type="text" id="carpentry-item" placeholder="e.g., Table">
+                    
+                    <label for="carpentry-quantity">Quantity:</label>
+                    <input type="number" id="carpentry-quantity" placeholder="Enter quantity">
+                    
+                    <label for="carpentry-budget">Budget:</label>
+                    <input type="number" id="carpentry-budget" placeholder="Enter your budget in UGX">
+                    
+                    <button onclick="submitCarpentryForm()">Submit</button>
+                </div>
+            </div>
+
+            <!-- Online Marketplace/Soko Mtandaoni -->
+            <div class="service">
+                <img src="e.jpg" alt="Online Marketplace">
+                <h2>Online Marketplace/Soko Mtandaoni</h2>
+                <p>Rent or sell houses and used items. Provide details like name, type, condition, and price for your listings.</p>
+                <div class="form">
+                    <label for="marketplace-item-name">Item Name:</label>
+                    <input type="text" id="marketplace-item-name" placeholder="e.g., Rental House">
+                    
+                    <label for="marketplace-type">Type or Model:</label>
+                    <input type="text" id="marketplace-type" placeholder="e.g., House with 2 rooms">
+                    
+                    <label for="marketplace-price">Price:</label>
+                    <input type="number" id="marketplace-price" placeholder="Enter price in UGX">
+                    
+                    <button onclick="submitMarketplaceForm()">Submit</button>
+                </div>
+            </div>
+
+            <!-- Shoes Making/Repair -->
+            <div class="service">
+                <img src="f.jpg" alt="Shoes Making/Repair">
+                <h2>Shoes Making/Repair</h2>
+                <p>Connect with skilled professionals for shoe making and repair services. Save time and money!</p>
+                <div class="form">
+                    <label for="shoes-making-name">Name of Shoes:</label>
+                    <input type="text" id="shoes-making-name" placeholder="e.g., Sandals">
+                    
+                    <label for="shoes-making-size">Size:</label>
+                    <input type="number" id="shoes-making-size" placeholder="Enter shoe size">
+                    
+                    <button onclick="submitShoesMakingForm()">Submit</button>
+                </div>
+            </div>
+
+            <!-- Clothes Making -->
+            <div class="service">
+                <img src="g.jpg" alt="Clothes Making">
+                <h2>Clothes Making</h2>
+                <p>We connect you with skilled tailors for various fashions. Save time and money!</p>
+                <div class="form">
+                    <label for="clothes-making-type">Type of Clothes:</label>
+                    <input type="text" id="clothes-making-type" placeholder="e.g., Dress">
+                    
+                    <label for="clothes-making-budget">Budget:</label>
+                    <input type="number" id="clothes-making-budget" placeholder="Enter your budget in UGX">
+                    
+                    <button onclick="submitClothesMakingForm()">Submit</button>
+                </div>
+            </div>
+
+            <!-- Hair Care/Growth -->
+            <div class="service">
+                <img src="h.jpg" alt="Hair Care/Growth">
+                <h2>Hair Care/Growth</h2>
+                <p>Training in hair growth oil making and shampoo making for quality hair care.</p>
+                <div class="form">
+                    <label for="hair-care-training">Training Interest:</label>
+                    <input type="text" id="hair-care-training" placeholder="e.g., Hair Growth Oil Making">
+                    
+                    <button onclick="submitHairCareForm()">Submit</button>
+                </div>
+            </div>
+
+            <!-- Ironing and Folding -->
+            <div class="service">
+                <img src="i.jpg" alt="Ironing and Folding">
+                <h2>Ironing and Folding</h2>
+                <p>HARAKA irons and folds clothes for you! Check our pricing and subscription plans.</p>
+                <div class="pricing">
+                    <div class="subscription-plan">
+                        <strong>Basic Plan:</strong> 5% discount
+                    </div>
+                    <div class="subscription-plan">
+                        <strong>Standard Plan:</strong> 10% discount
+                    </div>
+                    <div class="subscription-plan">
+                        <strong>Premier Plan:</strong> 15% discount
+                    </div>
+                </div>
+                <div class="form">
+                    <label for="ironing-item">Item to Iron:</label>
+                    <input type="text" id="ironing-item" placeholder="e.g., Shirt">
+                    
+                    <button onclick="submitIroningForm()">Submit</button>
+                </div>
+            </div>
+            
 <div class="section">
     <h3>Subscription Plans:</h3>
     <div class="plans">
@@ -391,6 +672,44 @@
             <p><strong>Value:</strong><br> Great savings compared to paying full price.</p>
         </div>
     </div>
+
+    </div>
+
+    <script>
+        function submitPhoneForm() {
+            alert("Phone shopping details submitted!");
+        }
+
+        function submitShoesForm() {
+            alert("Shoes shopping details submitted!");
+        }
+
+        function submitCarpentryForm() {
+            alert("Carpentry order submitted!");
+        }
+
+        function submitMarketplaceForm() {
+            alert("Marketplace listing submitted!");
+        }
+
+        function submitShoesMakingForm() {
+            alert("Shoe making details submitted!");
+        }
+
+        function submitClothesMakingForm() {
+            alert("Clothes making details submitted!");
+        }
+
+        function submitHairCareForm() {
+            alert("Hair care training interest submitted!");
+        }
+
+        function submitIroningForm() {
+            alert("Ironing request submitted!");
+        }
+    </script>
+
+
 </div>
 
 
@@ -402,8 +721,7 @@
       <h1 id="signup">Create an Account </h1>
 <section class="container" id="signup-form">
     <h2>Create Your Account</h2>
-    <form action="/signup" method="POST" onsubmit="return validateSignupForm()">
-  
+    <form id="signup-form" onsubmit="return validateSignupForm()">
         <label for="firstname">First Name <span class="required">*</span></label>
         <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
 
@@ -440,7 +758,7 @@
       
     <button type="submit" class="submit-btn">Sign Up</button>
 </form>
-    </form>
+
 
     <div class="toggle-form">
         Already have an account? <a onclick="showLoginForm()">Log in here</a>
@@ -448,26 +766,26 @@
 </section>
 
 <!-- Login Form -->
+
+   <!-- Login Form -->
 <section class="container login-form" id="login-form">
     <h2>Log in to Your Account</h2>
-    <form action="/login" method="POST" onsubmit="return validateLoginForm()">
-   
+    <form id="signup-form" onsubmit="return validateLoginForm()">
         <label for="login-email">Email <span class="required">*</span></label>
         <input type="email" id="login-email" name="login-email" placeholder="Enter your email" required>
 
         <label for="login-password">Password <span class="required">*</span></label>
         <input type="password" id="login-password" name="login-password" placeholder="Enter your password" required minlength="8">
 
-        
-    <button type="submit" class="submit-btn">Log In</button>
-</form>
+        <button type="submit" class="submit-btn">Log In</button>
     </form>
 
     <div class="toggle-form">
         Don't have an account? 
         <a onclick="showSignupForm()">Sign up here</a>
-</form>
     </div>
+
+
 </section>
  <h1 id="myaccount">My Account</h1>
 <div id="account" class="container">
@@ -1241,6 +1559,51 @@ h1, h2 {
             document.getElementById('login-message').style.display = 'block'; // Show login prompt
         }
     };
+    function validateSignupForm() {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm_password').value;
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+}
+function validateLoginForm() {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    // Add your validation logic here (e.g., check format)
+    if (!email || !password) {
+        alert('Please fill in all fields.');
+        return false; // Prevent form submission
+    }
+
+    return true; // Allow form submission
+}
+app.get('/profile', (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).send('You must be logged in to view this page.');
+    }
+
+    // Render the profile page with user data (use a template engine or send HTML)
+    res.send(`
+        <h1>My Account</h1>
+        <div id="account" class="container">
+            <div class="section">
+                <h2>Profile Information</h2>
+                <p>Username: <strong>${req.session.user.name}</strong></p>
+                <p>Email: <strong>${req.session.user.email}</strong></p>
+                <!-- Add more profile info as needed -->
+            </div>
+        </div>
+    `);
+});
+app.post('/signup', (req, res) => {
+  console.log(req.body); // Log the submitted form data
+  res.send('Signup successful!'); // Respond back to the client
+});
+
     
 </script>
 </body>
